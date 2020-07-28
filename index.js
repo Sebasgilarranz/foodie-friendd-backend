@@ -9,11 +9,8 @@ var cors = require('cors');
 
 require("dotenv").config(); // FOR LOCAL USE ONLY
 
-app.listen(process.env.PORT || 5000, function(){
-  console.log("Express server listening on port %d in %s mode", this.address().port, app.settings.env);
-});
+const port = process.env.PORT || 5000;
 const app = express();
-app.use(cors());
 
 require("./startup/passport/passport-setup")();
 require("./startup/db")();
@@ -33,6 +30,7 @@ app.use(
   })
 );
 
+app.use(cors());
 app.use(bodyParser.json());
 app.use(passport.initialize());
 app.use(passport.session());
