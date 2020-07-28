@@ -26,6 +26,9 @@ const validateResetPass = require("../validation/ResetPass");
 ////////////////////////////////////
 
 
+///////////////////////////////////////////////////////////////////////////////////////////
+//                                      REGISTER                                        //
+/////////////////////////////////////////////////////////////////////////////////////////
 // @route POST api/auth/register
 // @desc Register user
 // @access Public
@@ -81,7 +84,7 @@ router.post("/register", async (req, res) => {
             .then(() => {
               return res
                 .status(200)
-                .send({ message: "A verification mail has been sent." });
+                .send({ success: true });
             })
             .catch(error => {
               return res
@@ -95,7 +98,9 @@ router.post("/register", async (req, res) => {
 });
 
 
-
+///////////////////////////////////////////////////////////////////////////////////////////
+//                              GET CONFIRMATION                                        //
+/////////////////////////////////////////////////////////////////////////////////////////
 // @route GET api/auth/confirmation/:token
 // @desc Email verification/ get confirmation
 // @access Public
@@ -142,7 +147,9 @@ router.get("/confirmation/:token", (req, res) => {
 });
 
 
-
+///////////////////////////////////////////////////////////////////////////////////////////
+//                                 LOGIN                                                //
+/////////////////////////////////////////////////////////////////////////////////////////
 // @route POST api/auth/login
 // @desc Login user
 // @access Public
@@ -175,16 +182,18 @@ router.post("/login", (req, res, next) => {
     
     req.login(user, err => {
       if (err) {
-        res.status(401).send({ message: "Login failed", err });
+        return res.status(401).send({ message: "Login failed", err });
       }
-      res.send({ message: "Login success", user: user.hidePassword() });
+      return res.send({ success: true, user: user.hidePassword() });
     });
   })(req, res, next);
 
 });
 
 
-
+///////////////////////////////////////////////////////////////////////////////////////////
+//                              FORGOT PASSWORD                                         //
+/////////////////////////////////////////////////////////////////////////////////////////
 // @route POST api/auth/login/fogot
 // @desc Send reset password link
 // Inputs : email
@@ -246,7 +255,9 @@ router.post("/login/forgot", (req, res) => {
 });
 
 
-
+///////////////////////////////////////////////////////////////////////////////////////////
+//                              RESET PASSWORD                                          //
+/////////////////////////////////////////////////////////////////////////////////////////
 // @route POST api/auth/login/reset
 // @desc Reset password
 // Reset password inputs : token, password 
@@ -318,7 +329,9 @@ router.post("/login/reset/:token", (req, res) => {
 });
 
 
-
+///////////////////////////////////////////////////////////////////////////////////////////
+//                                   RESEND LINK                                         //
+/////////////////////////////////////////////////////////////////////////////////////////
 // @route POST api/auth/resend
 // @desc Resend confirmation link
 // Inputs : email
@@ -377,14 +390,16 @@ router.post("/resend", (req, res) => {
 });
 
 
-
+///////////////////////////////////////////////////////////////////////////////////////////
+//                                      LOGOUT                                          //
+/////////////////////////////////////////////////////////////////////////////////////////
 // @route POST api/auth/logout
 // @desc Logout
 // Logout User inputs : null
 router.post("/logout", (req, res) => {
   req.session.destroy(err => {
     if (err) {
-      res.status(400).send({ message: "Logout failed", err });
+      return res.status(400).send({ message: "Logout failed", err });
     }
     req.sessionID = null;
     req.logout();
@@ -394,7 +409,9 @@ router.post("/logout", (req, res) => {
 
 
 
-
+///////////////////////////////////////////////////////////////////////////////////////////
+//                          DELETE USER NOT VERIFIED                                    //
+/////////////////////////////////////////////////////////////////////////////////////////
 // @route POST api/auth/register/reset
 // @desc Reset register / Delete user with the email if is unverified
 // @access Public
@@ -414,7 +431,9 @@ router.post("/register/reset", (req, res) => {
 
 
 
-///////////////////////////////////////////new/////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////
+//                                    REGISTER 1                                        //
+/////////////////////////////////////////////////////////////////////////////////////////
 // @route POST api/auth/register
 // @desc Register user
 // @access Public
@@ -483,7 +502,7 @@ router.post("/register1", async (req, res) => {
             .then(() => {
               return res
                 .status(200)
-                .send({ message: "A verification mail has been sent." });
+                .send({ success: true });
             })
             .catch(error => {
               return res
@@ -496,8 +515,9 @@ router.post("/register1", async (req, res) => {
   });
 });
 
-/////////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////new////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////
+//                            GET CONFIRMATION 1                                        //
+/////////////////////////////////////////////////////////////////////////////////////////
 // @route GET api/auth/confirmation/:token
 // @desc Email verification/ get confirmation
 // @access Public
@@ -546,8 +566,9 @@ router.post("/confirmation1", (req, res) => {
   });
 });
 
-////////////////////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////new///////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////
+//                                       LOGIN 1                                         //
+//////////////////////////////////////////////////////////////////////////////////////////
 // @route POST api/auth/login
 // @desc Login user
 // @access Public
@@ -583,16 +604,18 @@ router.post("/login1", (req, res, next) => {
     req.login(user, err => {
       if (err) {
         console.log("3");
-        res.status(401).send({ message: "Login failed", err });
+        return res.status(401).send({ message: "Login failed", err });
       }
-      res.send({ message: "Login success", user: user.hidePassword() });
+     
+      return res.send({ success: true, user: user.hidePassword() });
     });
   })(req, res, next);
 
 });
 
-////////////////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////new/////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////
+//                              RESET PASSWORD 1                                        //
+/////////////////////////////////////////////////////////////////////////////////////////
 // @route POST api/auth/login/reset
 // @desc Reset password
 // Reset password inputs : token, password 
@@ -672,8 +695,11 @@ router.post("/login/reset1", (req, res) => {
     });
   });
 });
-/////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////new/////////////////////////////////
+
+
+///////////////////////////////////////////////////////////////////////////////////////////
+//                                 ADD FAVORITE                                         //
+/////////////////////////////////////////////////////////////////////////////////////////
 router.post("/addFavorite", (req, res) => {
   const restId = req.body.restData;
  
@@ -687,8 +713,10 @@ router.post("/addFavorite", (req, res) => {
 
   })
 });
-///////////////////////////////////////////////////////////////////////
-///////////////////////////////////////new/////////////////////////////
+
+///////////////////////////////////////////////////////////////////////////////////////////
+//                                    GET FAVORITE                                      //
+/////////////////////////////////////////////////////////////////////////////////////////
 router.get("/getFavorites", (req, res) => {
 
    User.findById(req.query.id, (error, data) => {
@@ -701,16 +729,22 @@ router.get("/getFavorites", (req, res) => {
     
 });
 
+///////////////////////////////////////////////////////////////////////////////////////////
+//                              IS FAV                                                  //
+/////////////////////////////////////////////////////////////////////////////////////////
 router.post("/isFav", (req,res)=> {
   User.findOne({_id:req.body.id, favorited: req.body.restData}, function(err, result) {
-    if(result)
-    {
-      return res.status(200).send(result);
+     if(result) 
+    { 
+      return res.status(200).send(result);  
     }else return res.status(400).send();
    
   })
 });
 
+///////////////////////////////////////////////////////////////////////////////////////////
+//                                   REMOVE FAV                                         //
+/////////////////////////////////////////////////////////////////////////////////////////
 router.post("/removeFav", (req,res)=> {
   const restData = req.body.restData;
   User.findOneAndUpdate({_id: req.body.id},{
@@ -718,7 +752,7 @@ router.post("/removeFav", (req,res)=> {
   }, { 'new': true}, (err, result) => {
   if (err){ return res.status(400).send();}
   else {
-  return res.status(200).send();
+  return res.status(200).send(err);
   }
 
 })
