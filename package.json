@@ -1,0 +1,51 @@
+{
+  "name": "foody-friend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "server": "nodemon server.js"
+  },
+  "engines": {
+    "node": "10.19.0",
+    "npm": "6.14.4"
+  },
+  "repository": {
+    
+  },
+  "author": "G01",
+  "license": "ISC",
+  "bugs": {
+  },
+  "dependencies": {
+    "@sendgrid/mail": "^7.2.1",
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.19.0",
+    "compression": "^1.7.4",
+    "connect-mongo": "^3.2.0",
+    "cors": "^2.8.5",
+    "crypto": "^1.0.1",
+    "custom-env": "^2.0.1",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "express-async-errors": "^3.1.1",
+    "express-session": "^1.17.1",
+    "helmet": "^3.23.3",
+    "is-empty": "^1.2.0",
+    "joi": "^14.3.1",
+    "joi-objectid": "^3.0.1",
+    "moment": "^2.27.0",
+    "mongoose": "^5.9.21",
+    "objectid": "^3.2.1",
+    "passport": "^0.4.1",
+    "passport-local": "^1.0.0",
+    "ramda": "^0.27.0",
+    "validator": "^13.1.1",
+    "winston": "^2.4.5",
+    "winston-mongodb": "^5.0.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.4"
+  }
+}
