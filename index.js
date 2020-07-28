@@ -11,10 +11,10 @@ require("dotenv").config(); // FOR LOCAL USE ONLY
 
 const port = process.env.PORT || 5000;
 const app = express();
-app.use(cors());
+
 require("./startup/passport/passport-setup")();
 require("./startup/db")();
-// require("./startup/cors")(app);
+require("./startup/cors")(app);
 require("./startup/logging")();
 require("./startup/prod")(app);
 require("./startup/validation")();
@@ -22,7 +22,7 @@ require("./startup/validation")();
 // Create session
 app.use(
   session({
-    secret: "123456",
+    secret: process.env.SESSION_KEY,
     resave: false,
     saveUninitialized: true,
     // Store session on DB
