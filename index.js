@@ -14,7 +14,7 @@ const app = express();
 
 require("./startup/passport/passport-setup")();
 require("./startup/db")();
-// require("./startup/cors")(app);
+require("./startup/cors")(app);
 require("./startup/logging")();
 require("./startup/prod")(app);
 require("./startup/validation")();
