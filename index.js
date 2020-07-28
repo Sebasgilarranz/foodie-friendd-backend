@@ -14,7 +14,7 @@ const app = express();
 app.use(cors());
 require("./startup/passport/passport-setup")();
 require("./startup/db")();
-require("./startup/cors")(app);
+// require("./startup/cors")(app);
 require("./startup/logging")();
 require("./startup/prod")(app);
 require("./startup/validation")();
@@ -29,11 +29,6 @@ app.use(
     store: new MongoStore({ mongooseConnection: mongoose.connection })
   })
 );
-app.use(function(req, res, next) {
-  res.header("Access-Control-Allow-Origin", "https://foodie-friendd.herokuapp.com"); // update to match the domain you will make the request from
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-  next();
-});
 
 app.use(bodyParser.json());
 app.use(passport.initialize());
