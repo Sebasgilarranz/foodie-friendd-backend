@@ -9,7 +9,7 @@ var cors = require('cors');
 
 require("dotenv").config(); // FOR LOCAL USE ONLY
 
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || 3000;
 const app = express();
 app.use(cors());
 require("./startup/passport/passport-setup")();
