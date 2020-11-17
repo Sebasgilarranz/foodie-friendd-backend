@@ -75,9 +75,9 @@ router.post("/register", async (req, res) => {
             subject: 'Email Verification',
             text: " ",
             html: `<p>Please verify your account by clicking the link: 
-                   <a href="https://${host}/account/confirm/${
+                   <a href="${host}/account/confirm/${
                       token.token
-                   }">https://${host}/account/confirm/${token.token}</a> </p>`
+                   }">${host}/account/confirm/${token.token}</a> </p>`
           };
           sgMail
             .send(msg)
@@ -161,9 +161,6 @@ router.post("/login", (req, res, next) => {
   req.body.email = req.body.email.toLowerCase();
 
   passport.authenticate("local", (err, user, info) => {
-    console.log(error);
-    console.log(user);
-    console.log(info);
 
     if (err) {
       return next(err);
@@ -371,7 +368,7 @@ router.post("/resend", (req, res) => {
         subject: 'Email Verification',
         text: " ",
         html: `<p>Please verify your account by clicking the link: 
-        <a href="https://${host}/login/${
+        <a href="${host}/login/${
            token.token
         }">Click Here</a> </p>`
       };
@@ -493,7 +490,7 @@ router.post("/register1", async (req, res) => {
             subject: 'Email Verification',
             text: " ",
             html: `<p>Please verify your account by clicking the link: 
-                   <a href="https://${host}/login/${
+                   <a href="${host}/login/${
                       token.token
                    }">Click Here</a> </p>`
           };

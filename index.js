@@ -4,18 +4,14 @@ const mongoose = require("mongoose");
 const passport = require("passport");
 const session = require("express-session");
 var MongoStore = require("connect-mongo")(session);
-const winston = require("winston");
 var cors = require('cors');
 
 require("dotenv").config(); // FOR LOCAL USE ONLY
 
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 5000;
 const app = express();
-app.use(cors());
 require("./startup/passport/passport-setup")();
 require("./startup/db")();
-// require("./startup/cors")(app);
-require("./startup/logging")();
 require("./startup/prod")(app);
 require("./startup/validation")();
 
@@ -30,6 +26,8 @@ app.use(
   })
 );
 
+app.use(cors());
+app.use(bodyParser.urlencoded({extended:true}));
 app.use(bodyParser.json());
 app.use(passport.initialize());
 app.use(passport.session());
@@ -37,4 +35,4 @@ app.use(passport.session());
 require("./routes/index")(app);
 
 app.get("/", (req, res) => res.send("Hello!"));
-app.listen(port, () => winston.info(`Server up and running on port ${port}...`));
+app.listen(port, () => console.log(`Server up and running on port ${port}...`));
