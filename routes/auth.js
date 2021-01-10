@@ -71,7 +71,7 @@ router.post("/register", async (req, res) => {
           // send verification email
           const msg = {
             to: user.email,
-            from: `foodiefriend2020@gmail.com`,
+            from: `foodiefriendd@gmail.com`,
             subject: 'Email Verification',
             text: " ",
             html: `<p>Please verify your account by clicking the link: 
@@ -226,7 +226,7 @@ router.post("/login/forgot", (req, res) => {
         // Send the mail
         const mail = {
           to: user.email,
-          from: `foodiefriend2020@gmail.com`,
+          from: `foodiefriendd@gmail.com`,
           subject: 'Reset Password Link',
           text: " ",
           html: `<p>
@@ -306,7 +306,7 @@ router.post("/login/reset/:token", (req, res) => {
           // Send mail confirming password change to the user
           const mail = {
             to: user.email,
-            from: `foodiefriend2020@gmail.com`,
+            from: `foodiefriendd@gmail.com`,
             subject: 'Email Verification',
             text: " ",
             html: `<p>This is a confirmation that the password for your account ${ user.email} has just been changed. </p>`
@@ -364,7 +364,7 @@ router.post("/resend", (req, res) => {
       // Send the mail
       const mail = {
         to: user.email,
-        from: `foodiefriend2020@gmail.com`,
+        from: `foodiefriendd@gmail.com`,
         subject: 'Email Verification',
         text: " ",
         html: `<p>Please verify your account by clicking the link: 
@@ -486,7 +486,7 @@ router.post("/register1", async (req, res) => {
           // send verification email
           const msg = {
             to: user.email,
-            from: `foodiefriend2020@gmail.com`,
+            from: `foodiefriendd@gmail.com`,
             subject: 'Email Verification',
             text: " ",
             html: `<p>Please verify your account by clicking the link: 
@@ -674,7 +674,7 @@ router.post("/login/reset1", (req, res) => {
           // Send mail confirming password change to the user
           const mail = {
             to: user.email,
-            from: `foodiefriend2020@gmail.com`,
+            from: `foodiefriendd@gmail.com`,
             subject: 'Email Verification',
             text: " ",
             html: `<p>This is a confirmation that the password for your account ${ user.email} has just been changed. </p>`
